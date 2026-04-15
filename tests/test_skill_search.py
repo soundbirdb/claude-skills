@@ -74,6 +74,13 @@ def test_search_skills_partial_tag_match():
     assert results[0]["name"] == "seo-audit"
 
 
+# Verify that searching by author name works — useful for finding all skills
+# by a specific contributor (e.g. filtering to just alirezarezvani's skills)
+def test_search_skills_by_author():
+    results = search_skills(SAMPLE_MARKETPLACE, "alirezarezvani")
+    assert len(results) == 2
+
+
 def test_load_marketplace_file_not_found():
     with pytest.raises(SystemExit):
         load_marketplace(Path("/nonexistent/path/marketplace.json"))
