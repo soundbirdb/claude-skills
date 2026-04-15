@@ -45,7 +45,8 @@ def display_results(skills: list[dict], query: str) -> None:
         print("No skills found.")
         return
 
-    for skill in skills:
+    # Sort results alphabetically by name for easier scanning
+    for skill in sorted(skills, key=lambda s: s.get("name", "").lower()):
         name = skill.get("name", "unknown")
         version = skill.get("version", "N/A")
         author = skill.get("author", "unknown")
