@@ -101,9 +101,18 @@ def test_display_results_empty(capsys):
 
 
 def test_display_results_single(capsys):
-    """Check that a single result is displayed with its name and description."""
-    results = [SAMPLE_MARKETPLACE["skills"][0]]
-    display_results(results, "git")
+    """Verify that a single result is displayed with name and description."""
+    display_results([SAMPLE_MARKETPLACE["skills"][0]], "git")
     captured = capsys.readouterr()
     assert "git-helper" in captured.out
     assert "Automates common git workflows" in captured.out
+
+
+def test_display_results_multiple(capsys):
+    """Verify that all matching results are shown when multiple skills match."""
+    display_results(SAMPLE_MARKETPLACE["skills"], "")
+    captured = capsys.readouterr()
+    # All three skill names should appear in the output
+    assert "git-helper" in captured.out
+    assert "code-review" in captured.out
+    assert "seo-audit" in captured.out
