@@ -8,6 +8,9 @@ from pathlib import Path
 
 MARKETPLACE_PATH = Path(".claude-plugin/marketplace.json")
 
+# Separator width used in display_results
+SEPARATOR_WIDTH = 72
+
 
 def load_marketplace(path: Path) -> dict:
     """Load and parse the marketplace JSON file."""
@@ -36,7 +39,7 @@ def display_results(skills: list[dict], query: str) -> None:
     """Pretty-print skill search results."""
     header = f"Skills matching '{query}'" if query else "All available skills"
     print(f"\n{header}")
-    print("=" * 60)
+    print("=" * SEPARATOR_WIDTH)
 
     if not skills:
         print("No skills found.")
@@ -47,12 +50,14 @@ def display_results(skills: list[dict], query: str) -> None:
         version = skill.get("version", "N/A")
         author = skill.get("author", "unknown")
         description = skill.get("description", "No description available.")
+        tags = ", ".join(skill.get("tags", [])) or "none"
         print(f"\n  Name:    {name} (v{version})")
         print(f"  Author:  {author}")
+        print(f"  Tags:    {tags}")
         print(f"  Desc:    {description}")
         print(f"  Install: /skill:install {name}")
 
-    print(f"\n{'=' * 60}")
+    print(f"\n{'=' * SEPARATOR_WIDTH}")
     print(f"Found {len(skills)} skill(s).\n")
 
 
