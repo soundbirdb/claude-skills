@@ -58,7 +58,8 @@ def display_results(skills: list[dict], query: str) -> None:
         print(f"  Author:  {author}")
         print(f"  Tags:    {tags}")
         if installs is not None:
-            print(f"  Installs: {installs}")
+            # Format install count with thousands separator for readability
+            print(f"  Installs: {installs:,}")
         print(f"  Desc:    {description}")
         print(f"  Install: /skill:install {name}")
 
