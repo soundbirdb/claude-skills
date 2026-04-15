@@ -67,6 +67,13 @@ def test_search_skills_no_match():
     assert results == []
 
 
+# Also verify that a partial tag match works, e.g. "mark" should match "markdown"
+def test_search_skills_partial_tag_match():
+    results = search_skills(SAMPLE_MARKETPLACE, "mark")
+    assert len(results) == 1
+    assert results[0]["name"] == "seo-audit"
+
+
 def test_load_marketplace_file_not_found():
     with pytest.raises(SystemExit):
         load_marketplace(Path("/nonexistent/path/marketplace.json"))
