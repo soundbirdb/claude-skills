@@ -61,7 +61,8 @@ def display_results(skills: list[dict], query: str) -> None:
             # Format install count with thousands separator for readability
             print(f"  Installs: {installs:,}")
         print(f"  Desc:    {description}")
-        print(f"  Install: /skill:install {name}")
+        # Use /skill:add as the install command (matches my local Claude setup)
+        print(f"  Install: /skill:add {name}")
 
     print(f"\n{'=' * SEPARATOR_WIDTH}")
     print(f"Found {len(skills)} skill(s).\n")
