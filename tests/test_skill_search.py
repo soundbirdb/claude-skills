@@ -100,7 +100,20 @@ def test_display_results_empty(capsys):
     assert "No skills found" in captured.out
 
 
-def test_display_results_shows_install_hint(capsys):
-    display_results(SAMPLE_MARKETPLACE["skills"][:1], "git")
+def test_display_results_single(capsys):
+    """Ensure a single result is displayed with name and description."""
+    results = [SAMPLE_MARKETPLACE["skills"][0]]
+    display_results(results, "git")
     captured = capsys.readouterr()
-    assert "/skill:install git-helper" in captured.out
+    assert "git-helper" in captured.out
+    assert "Automates common git workflows" in captured.out
+
+
+def test_display_results_multiple(capsys):
+    """Ensure all matching results are shown when multiple skills match."""
+    results = SAMPLE_MARKETPLACE["skills"]
+    display_results(results, "")
+    captured = capsys.readouterr()
+    assert "git-helper" in captured.out
+    assert "code-review" in captured.out
+    assert "seo-audit" in captured.out
