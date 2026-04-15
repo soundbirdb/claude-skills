@@ -52,9 +52,13 @@ def display_results(skills: list[dict], query: str) -> None:
         author = skill.get("author", "unknown")
         description = skill.get("description", "No description available.")
         tags = ", ".join(skill.get("tags", [])) or "none"
+        # Show install count if available, useful for gauging popularity
+        installs = skill.get("installs")
         print(f"\n  Name:    {name} (v{version})")
         print(f"  Author:  {author}")
         print(f"  Tags:    {tags}")
+        if installs is not None:
+            print(f"  Installs: {installs}")
         print(f"  Desc:    {description}")
         print(f"  Install: /skill:install {name}")
 
