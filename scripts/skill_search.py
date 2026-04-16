@@ -45,8 +45,8 @@ def display_results(skills: list[dict], query: str) -> None:
         print("No skills found.")
         return
 
-    # Sort results alphabetically by name for easier scanning
-    for skill in sorted(skills, key=lambda s: s.get("name", "").lower()):
+    # Sort by installs descending so most popular skills show up first
+    for skill in sorted(skills, key=lambda s: s.get("installs") or 0, reverse=True):
         name = skill.get("name", "unknown")
         version = skill.get("version", "N/A")
         author = skill.get("author", "unknown")
@@ -87,8 +87,4 @@ def main() -> None:
 
     marketplace = load_marketplace(Path(args.marketplace))
     results = search_skills(marketplace, args.query)
-    display_results(results, args.query)
-
-
-if __name__ == "__main__":
-    main()
+    
