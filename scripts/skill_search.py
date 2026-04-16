@@ -87,4 +87,8 @@ def main() -> None:
 
     marketplace = load_marketplace(Path(args.marketplace))
     results = search_skills(marketplace, args.query)
-    
+    display_results(results, args.query)
+
+
+if __name__ == "__main__":
+    main()
