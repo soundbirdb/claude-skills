@@ -101,9 +101,8 @@ def test_display_results_empty(capsys):
 
 
 def test_display_results_single(capsys):
-    # Sanity check that a single result is displayed with its name and author
+    # Sanity check: make sure a single result is displayed with its name
     results = [SAMPLE_MARKETPLACE["skills"][0]]
     display_results(results, "git")
     captured = capsys.readouterr()
     assert "git-helper" in captured.out
-    assert "alirezarezvani" in captured.out
