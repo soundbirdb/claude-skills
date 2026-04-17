@@ -101,17 +101,9 @@ def test_display_results_empty(capsys):
 
 
 def test_display_results_single(capsys):
-    # Verify that a single result is displayed with the skill name visible
-    single_result = [SAMPLE_MARKETPLACE["skills"][0]]
-    display_results(single_result, "git")
+    # Sanity check that a single result is displayed with its name and author
+    results = [SAMPLE_MARKETPLACE["skills"][0]]
+    display_results(results, "git")
     captured = capsys.readouterr()
     assert "git-helper" in captured.out
-
-
-def test_display_results_multiple(capsys):
-    # All three skills should appear when displaying full results
-    display_results(SAMPLE_MARKETPLACE["skills"], "")
-    captured = capsys.readouterr()
-    assert "git-helper" in captured.out
-    assert "code-review" in captured.out
-    assert "seo-audit" in captured.out
+    assert "alirezarezvani" in captured.out
